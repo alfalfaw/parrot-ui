@@ -39,7 +39,10 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "generator-star-spacing": "off",
+      "space-before-function-paren": 0
+    }
   },
   "browserslist": [
     "> 1%",
