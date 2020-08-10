@@ -61,7 +61,7 @@ export default {
   line-height: 1;
   white-space: nowrap;
   cursor: pointer;
-  background: #fff;
+  background: #ecf0f3;
   border: none;
   // border: 1px solid #dcdfe6;
   color: #606266;

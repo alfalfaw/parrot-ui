@@ -6,6 +6,11 @@
     </pt-radio-group>
     <div class="divider"></div>
     <pt-button round @click="handleClick" icon="icon-pinglun">提交表单</pt-button>
+
+    <div class="divider"></div>
+    <pt-checkbox v-model="status" checked-value="accepted" unchecked-value="not_accepted" label="是否接受协议"></pt-checkbox>
+
+    <div class="divider"></div>
   </div>
 </template>
 
@@ -15,7 +20,8 @@ export default {
   components: {},
   data() {
     return {
-      gender: '1'
+      gender: '1',
+      status: 'accepted'
     }
   },
   methods: {

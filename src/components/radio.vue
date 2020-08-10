@@ -62,7 +62,9 @@ export default {
   white-space: nowrap;
   // outline: none;
   font-size: 14px;
-  margin-right: 30px;
+  + .pt-radio {
+    margin-left: 30px;
+  }
   // 不可选择
   -moz-user-select: none;
   -webkit-user-select: none;

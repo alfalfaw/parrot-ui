@@ -1,220 +1,89 @@
 <template>
-  <button
-    class="hm-button"
-    @click="handleClick"
-    :disabled="disabled"
-    :class="[
-      `hm-button--${type}`,
-      {
-        'is-plain': plain,
-        'is-round': round,
-        'is-circle': circle,
-        'is-disabled': disabled
-      }
-    ]"
-  >
-    <!-- 字体图标的支持 -->
-    <i :class="icon" v-if="icon"></i>
-    <span><slot></slot></span>
-  </button>
+  <label class="hm-checkbox">
+    <span class="hm-checkbox__input">
+      <span class="hm-checkbox__inner"></span>
+      <input type="checkbox" class="hm-checkbox__original" />
+    </span>
+    <span class="hm-checkbox__label" v-if="$slots.default">
+      <slot></slot>
+    </span>
+  </label>
 </template>
 
 <script>
 export default {
-  name: 'HmButton',
+  name: 'HmCheckbox',
   props: {
-    type: {
-      type: String,
-      default: 'default'
-    },
-    // 是否是朴素按钮
-    plain: {
-      type: Boolean,
-      default: false
-    },
-    // 是否是圆角按钮
-    round: {
-      type: Boolean,
-      default: false
-    },
-    circle: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    icon: {
+    label: {
       type: String,
       default: ''
-    }
-  },
-  methods: {
-    handleClick(e) {
-      this.$emit('click', e)
-    }
+    },
+    checked: Boolean
   }
 }
 </script>
 
 <style lang="scss">
-.hm-button {
-  display: inline-block;
-  line-height: 1;
-  white-space: nowrap;
-  cursor: pointer;
-  background: #fff;
-  border: 1px solid #dcdfe6;
+.hm-checkbox {
   color: #606266;
-  -webkit-appearance: none;
-  text-align: center;
-  box-sizing: border-box;
-  outline: none;
-  margin: 0;
-  transition: 0.1s;
   font-weight: 500;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  padding: 12px 20px;
   font-size: 14px;
-  border-radius: 4px;
-
-  &:hover,
-  &:focus {
-    color: #409eff;
-    border-color: #c6e2ff;
-    background-color: #ecf5ff;
-  }
-
-  &.is-plain:hover,
-  &.is-plain:focus {
-    background: #fff;
-    border-color: #409eff;
-    color: #409eff;
-  }
-
-  &--primary {
-    color: #fff;
-    background-color: #409eff;
-    border-color: #409eff;
-
-    &:hover,
-    &:focus {
-      background: #66b1ff;
-      border-color: #66b1ff;
-      color: #fff;
-    }
-    &.is-plain {
-      color: #409eff;
-      background: #ecf5ff;
-      border-color: #b3d8ff;
-      &:hover,
-      &:focus {
-        background: #409eff;
-        border-color: #409eff;
-        color: #fff;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+  user-select: none;
+  margin-right: 30px;
+  .hm-checkbox__input {
+    white-space: nowrap;
+    cursor: pointer;
+    outline: none;
+    display: inline-block;
+    line-height: 1;
+    position: relative;
+    vertical-align: middle;
+    .hm-checkbox__inner {
+      display: inline-block;
+      position: relative;
+      border: 1px solid #dcdfe6;
+      border-radius: 2px;
+      box-sizing: border-box;
+      width: 14px;
+      height: 14px;
+      background-color: #fff;
+      z-index: 1;
+      transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46), background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
+      &:after {
+        box-sizing: content-box;
+        content: '';
+        border: 1px solid #fff;
+        border-left: 0;
+        border-top: 0;
+        height: 7px;
+        left: 4px;
+        position: absolute;
+        top: 1px;
+        transform: rotate(45deg) scaleY(0);
+        width: 3px;
+        transition: transform 0.15s ease-in 0.05s;
+        transform-origin: center;
       }
     }
-  }
-  &--success {
-    color: #fff;
-    background-color: #67c23a;
-    border-color: #67c23a;
-    &:hover,
-    &:focus {
-      background: #85ce61;
-      border-color: #85ce61;
-      color: #fff;
-    }
-    &.is-plain {
-      color: #67c23a;
-      background: #f0f9eb;
-      border-color: #c2e7b0;
-      &:hover,
-      &:focus {
-        background: #67c23a;
-        border-color: #67c23a;
-        color: #fff;
-      }
+    .hm-checkbox__original {
+      opacity: 0;
+      outline: none;
+      position: absolute;
+      margin: 0;
+      width: 0;
+      height: 0;
+      z-index: -1;
     }
   }
-  &--info {
-    color: #fff;
-    background-color: #909399;
-    border-color: #909399;
-    &:hover,
-    &:focus {
-      background: #a6a9ad;
-      border-color: #a6a9ad;
-      color: #fff;
-    }
-    &.is-plain {
-      color: #909399;
-      background: #f4f4f5;
-      border-color: #d3d4d6;
-      &:hover,
-      &:focus {
-        background: #909399;
-        border-color: #909399;
-        color: #fff;
-      }
-    }
-  }
-  &--warning {
-    color: #fff;
-    background-color: #e6a23c;
-    border-color: #e6a23c;
-    &:hover,
-    &:focus {
-      background: #ebb563;
-      border-color: #ebb563;
-      color: #fff;
-    }
-    &.is-plain {
-      color: #e6a23c;
-      background: #fdf6ec;
-      border-color: #f5dab1;
-      &:hover,
-      &:focus {
-        background: #e6a23c;
-        border-color: #e6a23c;
-        color: #fff;
-      }
-    }
-  }
-  &--danger {
-    color: #fff;
-    background-color: #f56c6c;
-    border-color: #f56c6c;
-    &:hover,
-    &:focus {
-      background: #f78989;
-      border-color: #f78989;
-      color: #fff;
-    }
-    &.is-plain {
-      color: #f56c6c;
-      background: #fef0f0;
-      border-color: #fbc4c4;
-      &:hover,
-      &:focus {
-        background: #f56c6c;
-        border-color: #f56c6c;
-        color: #fff;
-      }
-    }
-  }
-
-  // 圆角
-  &.is-round {
-    border-radius: 20px;
-    padding: 12px 23px;
-  }
-  &.is-circle {
-    border-radius: 50%;
-    padding: 12px;
+  .hm-checkbox__label {
+    display: inline-block;
+    padding-left: 10px;
+    line-height: 19px;
+    font-size: 14px;
   }
 }
 </style>
