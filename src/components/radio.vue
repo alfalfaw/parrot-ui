@@ -54,8 +54,6 @@ export default {
 
 <style lang="scss" scoped>
 .pt-radio {
-  color: #606266;
-  font-weight: 500;
   line-height: 1;
   position: relative;
   cursor: pointer;
@@ -77,10 +75,11 @@ export default {
     line-height: 1;
     position: relative;
     vertical-align: middle;
-
+    box-shadow: -8px -4px 8px 0px #ffffff, 8px 4px 12px 0px #d1d9e6;
+    border-radius: 50%;
     .pt-radio__inner {
       // 模拟radio
-      border: 1px solid #dcdfe6;
+      // border: 1px solid #dcdfe6;
       border-radius: 50%;
       display: inline-block;
       height: 14px;
@@ -115,6 +114,7 @@ export default {
     }
   }
   .pt-radio__label {
+    color: #606266;
     font-size: 14px;
     padding-left: 10px;
   }
@@ -122,15 +122,15 @@ export default {
 .pt-radio.is-checked {
   .pt-radio__input {
     .pt-radio__inner {
-      border-color: #409eff;
-      background: #409eff;
+      border-color: rgba(149, 175, 192, 1);
+      background: rgba(149, 175, 192, 1);
       &::after {
         transform: translate(-50%, -50%) scale(1);
       }
     }
   }
   .pt-radio__label {
-    color: #409eff;
+    color: rgba(149, 175, 192, 1);
   }
 }
 </style>

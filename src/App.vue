@@ -4,6 +4,8 @@
       <pt-radio label="1">男</pt-radio>
       <pt-radio label="0">女</pt-radio>
     </pt-radio-group>
+    <div class="divider"></div>
+    <pt-button round @click="handleClick" icon="icon-pinglun">提交表单</pt-button>
   </div>
 </template>
 
@@ -15,8 +17,15 @@ export default {
     return {
       gender: '1'
     }
+  },
+  methods: {
+    handleClick(e) {}
   }
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.divider {
+  margin-bottom: 20px;
+}
+</style>
