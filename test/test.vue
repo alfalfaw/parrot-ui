@@ -1,89 +1,129 @@
 <template>
-  <label class="hm-checkbox">
-    <span class="hm-checkbox__input">
-      <span class="hm-checkbox__inner"></span>
-      <input type="checkbox" class="hm-checkbox__original" />
+  <div class="hm-input" :class="{ 'hm-input--suffix': showSuffix }">
+    <input
+      class="hm-input__inner"
+      :class="{ 'is-disabled': disabled }"
+      :placeholder="placeholder"
+      :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
+      :disabled="disabled"
+      :value="value"
+      @input="handleInput"
+    />
+    <span class="hm-input__suffix" v-if="showSuffix">
+      <i v-if="clearable && this.value" class="hm-input__icon el-icon-circle-close hm-input__clear" @click="clear"></i>
+      <i v-if="showPassword" class="hm-input__icon el-icon-view hm-input__clear" @click="handlePasswordVisible"></i>
     </span>
-    <span class="hm-checkbox__label" v-if="$slots.default">
-      <slot></slot>
-    </span>
-  </label>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'HmCheckbox',
+  name: 'HmInput',
+  data() {
+    return {
+      passwordVisible: false
+    }
+  },
   props: {
-    label: {
+    placeholder: {
       type: String,
       default: ''
     },
-    checked: Boolean
+    type: {
+      type: String,
+      default: 'text'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    value: [String, Number],
+    clearable: {
+      type: Boolean,
+      default: false
+    },
+    showPassword: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    showSuffix() {
+      return this.clearable || this.showPassword
+    }
+  },
+  methods: {
+    handleInput(e) {
+      this.$emit('input', e.target.value)
+    },
+    clear() {
+      // console.log('123')
+      this.$emit('input', '')
+    },
+    handlePasswordVisible() {
+      this.passwordVisible = !this.passwordVisible
+    }
   }
 }
 </script>
 
 <style lang="scss">
-.hm-checkbox {
-  color: #606266;
-  font-weight: 500;
-  font-size: 14px;
+.hm-input {
+  width: 180px;
   position: relative;
-  cursor: pointer;
+  font-size: 14px;
   display: inline-block;
-  white-space: nowrap;
-  user-select: none;
-  margin-right: 30px;
-  .hm-checkbox__input {
-    white-space: nowrap;
+  .hm-input__inner {
     cursor: pointer;
-    outline: none;
+    -webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    box-sizing: border-box;
+    color: #000;
     display: inline-block;
-    line-height: 1;
-    position: relative;
-    vertical-align: middle;
-    .hm-checkbox__inner {
-      display: inline-block;
-      position: relative;
-      border: 1px solid #dcdfe6;
-      border-radius: 2px;
-      box-sizing: border-box;
-      width: 14px;
-      height: 14px;
-      background-color: #fff;
-      z-index: 1;
-      transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46), background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
-      &:after {
-        box-sizing: content-box;
-        content: '';
-        border: 1px solid #fff;
-        border-left: 0;
-        border-top: 0;
-        height: 7px;
-        left: 4px;
-        position: absolute;
-        top: 1px;
-        transform: rotate(45deg) scaleY(0);
-        width: 3px;
-        transition: transform 0.15s ease-in 0.05s;
-        transform-origin: center;
-      }
-    }
-    .hm-checkbox__original {
-      opacity: 0;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding: 0 15px;
+    transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    width: 100%;
+
+    &:focus {
       outline: none;
-      position: absolute;
-      margin: 0;
-      width: 0;
-      height: 0;
-      z-index: -1;
+      border-color: #409eff;
+    }
+    &.is-disabled {
+      background-color: #f5f7fa;
+      border-color: #e4e7ed;
+      color: #c0c4cc;
+      cursor: not-allowed;
     }
   }
-  .hm-checkbox__label {
-    display: inline-block;
-    padding-left: 10px;
-    line-height: 19px;
-    font-size: 14px;
+}
+
+.hm-input--suffix {
+  .hm-input__inner {
+    padding-right: 30px;
+  }
+  .hm-input__suffix {
+    position: absolute;
+    height: 100%;
+    right: 10px;
+    top: 0;
+    line-height: 40px;
+    text-align: center;
+    color: #c0c4cc;
+    transition: all 0.3s;
+    z-index: 900;
+    i {
+      color: #c0c4cc;
+      font-size: 14px;
+      cursor: pointer;
+      transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
   }
 }
 </style>

@@ -41,9 +41,9 @@ export default {
     }
   },
   created() {
-    console.log(this.value)
-    console.log(this.checkedValue)
-    console.log(this.uncheckedValue)
+    // console.log(this.value)
+    // console.log(this.checkedValue)
+    // console.log(this.uncheckedValue)
   },
   methods: {}
 }

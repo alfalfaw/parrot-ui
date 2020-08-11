@@ -11,6 +11,11 @@
     <pt-checkbox v-model="status" checked-value="accepted" unchecked-value="not_accepted" label="是否接受协议"></pt-checkbox>
 
     <div class="divider"></div>
+    <pt-switch v-model="switch1" checked-value="accepted" unchecked-value="not_accepted"></pt-switch>
+    <div class="divider"></div>
+    <pt-input showPassword clearable v-model="inputVal" type="password"></pt-input>
+    <div class="divider"></div>
+    <pt-dialog></pt-dialog>
   </div>
 </template>
 
@@ -21,7 +26,9 @@ export default {
   data() {
     return {
       gender: '1',
-      status: 'accepted'
+      status: 'accepted',
+      switch1: 'not_accepted',
+      inputVal: '请输入内容'
     }
   },
   methods: {
