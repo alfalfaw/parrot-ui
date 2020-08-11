@@ -22,6 +22,9 @@
         <pt-button round small @click="handleClick" icon="icon-pinglun">提交</pt-button>
       </template>
     </pt-dialog>
+    <div class="divider"></div>
+    <pt-button round @click="showMessage">显示消息</pt-button>
+    <div class="divider"></div>
   </div>
 </template>
 
@@ -31,7 +34,7 @@ export default {
   components: {},
   watch: {
     inputVal(newVal) {
-      console.log(newVal)
+      // console.log(newVal)
     }
   },
   data() {
@@ -55,13 +58,24 @@ export default {
     },
     dialogClosed() {
       // console.log('dialog closed')
+    },
+    // 显示消息
+    showMessage() {
+      this.$message({ content: '这是一条提示消息', type: 'info' })
     }
-  }
+  },
+  created() {}
 }
 </script>
 
 <style lang="scss">
 .divider {
   margin-bottom: 20px;
+}
+#message {
+  // position: fixed;
+  // left: 50%;
+  // transform: translateX(-50%);
+  // top: 20px;
 }
 </style>
