@@ -3,7 +3,7 @@
     class="pt-button"
     @click="handleClick"
     :disabled="disabled"
-    :class="[`pt-button--${type}`, { 'is-round': round, 'is-circle': circle, 'is-disabled': disabled }]"
+    :class="[`pt-button--${type}`, { 'is-round': round, 'is-circle': circle, 'is-disabled': disabled, 'is-small': small }]"
   >
     <i :class="['iconfont', icon]" v-if="icon"></i>
     <span>
@@ -40,6 +40,10 @@ export default {
     icon: {
       type: String,
       default: ''
+    },
+    small: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -51,7 +55,7 @@ export default {
     }
   },
   created() {
-    console.log(this.icon)
+    // console.log(this.icon)
   }
 }
 </script>
@@ -71,7 +75,7 @@ export default {
   // box-sizing: border-box;
   outline: none;
   // margin: 0;
-  transition: 0.1s;
+  transition: 0.65s;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -90,6 +94,12 @@ export default {
   &:active {
     box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.7), inset -2px -2px 4px rgba(255, 255, 255, 0.5),
       inset 2px 2px 2px rgba(255, 255, 255, 0.075), inset 2px 2px 4px rgba(0, 0, 0, 0.15);
+  }
+  &.is-small {
+    padding: 6px 9px;
+    &.is-round {
+      border-radius: 12px;
+    }
   }
   &.is-round {
     border-radius: 16px;

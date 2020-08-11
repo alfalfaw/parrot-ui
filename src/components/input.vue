@@ -65,9 +65,9 @@ export default {
   },
   computed: {},
   created() {
-    console.log(this.showPassword)
-    console.log(this.clearable)
-    console.log(this.value)
+    // console.log(this.showPassword)
+    // console.log(this.clearable)
+    // console.log(this.value)
   }
 }
 </script>

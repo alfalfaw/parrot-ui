@@ -1,129 +1,150 @@
 <template>
-  <div class="hm-input" :class="{ 'hm-input--suffix': showSuffix }">
-    <input
-      class="hm-input__inner"
-      :class="{ 'is-disabled': disabled }"
-      :placeholder="placeholder"
-      :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
-      :disabled="disabled"
-      :value="value"
-      @input="handleInput"
-    />
-    <span class="hm-input__suffix" v-if="showSuffix">
-      <i v-if="clearable && this.value" class="hm-input__icon el-icon-circle-close hm-input__clear" @click="clear"></i>
-      <i v-if="showPassword" class="hm-input__icon el-icon-view hm-input__clear" @click="handlePasswordVisible"></i>
-    </span>
-  </div>
+  <transition name="dialog-fade" @after-enter="afterEnter" @after-leave="afterLeave">
+    <div class="hm-dialog__wrapper" v-show="visible" @click.self="handleClose">
+      <div class="hm-dialog" :style="{ width: width, marginTop: top }">
+        <div class="hm-dialog__header">
+          <slot name="title">
+            <span class="hm-dialog__title">{{ title }}</span>
+          </slot>
+          <button class="hm-dialog__headerbtn" @click="handleClose">
+            <i class="el-icon-close"></i>
+          </button>
+        </div>
+        <div class="hm-dialog__body">
+          <!-- 默认插槽 -->
+          <slot></slot>
+        </div>
+        <div class="hm-dialog__footer" v-if="$slots.footer">
+          <slot name="footer"></slot>
+        </div>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
 export default {
-  name: 'HmInput',
-  data() {
-    return {
-      passwordVisible: false
-    }
-  },
+  name: 'HmDialog',
   props: {
-    placeholder: {
+    title: {
       type: String,
-      default: ''
+      default: '提示'
     },
-    type: {
+    width: {
       type: String,
-      default: 'text'
+      default: '50%'
     },
-    disabled: {
+    top: {
+      type: String,
+      default: '15vh'
+    },
+    visible: {
       type: Boolean,
       default: false
-    },
-    value: [String, Number],
-    clearable: {
-      type: Boolean,
-      default: false
-    },
-    showPassword: {
-      type: Boolean,
-      default: false
-    }
-  },
-  computed: {
-    showSuffix() {
-      return this.clearable || this.showPassword
     }
   },
   methods: {
-    handleInput(e) {
-      this.$emit('input', e.target.value)
+    handleClose() {
+      this.$emit('update:visible', false)
     },
-    clear() {
-      // console.log('123')
-      this.$emit('input', '')
+    afterEnter() {
+      this.$emit('opened')
     },
-    handlePasswordVisible() {
-      this.passwordVisible = !this.passwordVisible
+    afterLeave() {
+      this.$emit('closed')
     }
   }
 }
 </script>
 
 <style lang="scss">
-.hm-input {
-  width: 180px;
-  position: relative;
-  font-size: 14px;
-  display: inline-block;
-  .hm-input__inner {
-    cursor: pointer;
-    -webkit-appearance: none;
-    background-color: #fff;
-    background-image: none;
-    border-radius: 4px;
-    border: 1px solid #dcdfe6;
-    box-sizing: border-box;
-    color: #000;
-    display: inline-block;
-    font-size: inherit;
-    height: 40px;
-    line-height: 40px;
-    outline: none;
-    padding: 0 15px;
-    transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-    width: 100%;
+.hm-dialog__wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  margin: 0;
+  z-index: 2001;
+  background-color: rgba(0, 0, 0, 0.5);
 
-    &:focus {
-      outline: none;
-      border-color: #409eff;
+  .hm-dialog {
+    position: relative;
+    margin: 15vh auto 50px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    width: 30%;
+
+    &__header {
+      padding: 20px 20px 10px;
+      .hm-dialog__title {
+        line-height: 24px;
+        font-size: 18px;
+        color: #303133;
+      }
+      .hm-dialog__headerbtn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 0;
+        background: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-size: 16px;
+        .el-icon-close {
+          color: #909399;
+        }
+      }
     }
-    &.is-disabled {
-      background-color: #f5f7fa;
-      border-color: #e4e7ed;
-      color: #c0c4cc;
-      cursor: not-allowed;
+
+    &__body {
+      padding: 30px 20px;
+      color: #606266;
+      font-size: 14px;
+      word-break: break-all;
+    }
+    &__footer {
+      padding: 10px 20px 20px;
+      text-align: right;
+      box-sizing: border-box;
+      .hm-button:first-child {
+        margin-right: 20px;
+      }
     }
   }
 }
 
-.hm-input--suffix {
-  .hm-input__inner {
-    padding-right: 30px;
+.dialog-fade-enter-active {
+  animation: dialog-fade-in 0.4s;
+}
+
+.dialog-fade-leave-active {
+  animation: dialog-fade-out 0.4s;
+}
+
+@keyframes dialog-fade-in {
+  0% {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
   }
-  .hm-input__suffix {
-    position: absolute;
-    height: 100%;
-    right: 10px;
-    top: 0;
-    line-height: 40px;
-    text-align: center;
-    color: #c0c4cc;
-    transition: all 0.3s;
-    z-index: 900;
-    i {
-      color: #c0c4cc;
-      font-size: 14px;
-      cursor: pointer;
-      transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-    }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-fade-out {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
   }
 }
 </style>
