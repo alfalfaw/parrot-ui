@@ -25,6 +25,8 @@
     <div class="divider"></div>
     <pt-button round @click="showMessage">显示消息</pt-button>
     <div class="divider"></div>
+
+    <pt-select v-model="selectVal"></pt-select>
   </div>
 </template>
 
@@ -43,7 +45,8 @@ export default {
       status: 'accepted',
       switch1: 'not_accepted',
       inputVal: '请输入内容',
-      visible: false
+      visible: false,
+      selectVal: 10012
     }
   },
   methods: {

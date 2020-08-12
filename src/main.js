@@ -8,6 +8,7 @@ import PtSwitch from './components/switch'
 import PtInput from './components/input'
 import PtDialog from './components/dialog'
 import PtMessage from './components/message/index'
+import PtSelect from './components/select'
 Vue.prototype.$message = PtMessage.install
 
 Vue.config.productionTip = false
@@ -19,6 +20,7 @@ Vue.component(PtCheckbox.name, PtCheckbox)
 Vue.component(PtSwitch.name, PtSwitch)
 Vue.component(PtInput.name, PtInput)
 Vue.component(PtDialog.name, PtDialog)
+Vue.component(PtSelect.name, PtSelect)
 
 new Vue({
   render: h => h(App)
