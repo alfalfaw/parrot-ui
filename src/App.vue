@@ -36,6 +36,8 @@
       <pt-tab-pane label="数据结构" name="tab-two">222</pt-tab-pane>
       <pt-tab-pane label="计算机组成" name="tab-three">333</pt-tab-pane>
     </pt-tabs>
+    <div class="divider"></div>
+    <pt-tag :color="tagColor" @close="tagClose" closeable>新标签</pt-tag>
   </div>
 </template>
 
@@ -54,7 +56,9 @@ export default {
       selectVal: 10012,
       dateVal: '2020-08-08',
       // testDate: '2020-08-15'
-      activeName: 'tab-one'
+      activeName: 'tab-one',
+      // 标签颜色
+      tagColor: '#95afc0'
     }
   },
   methods: {
@@ -75,7 +79,10 @@ export default {
       const choice = ['info', 'warning', 'error', 'success']
       this.$message({ content: '这是一条消息', type: choice[Math.floor(Math.random() * 4)] })
     },
-    handleTabChange() {}
+    handleTabChange() {},
+    tagClose() {
+      // alert('tag close')
+    }
   },
   created() {}
 }
