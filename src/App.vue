@@ -6,7 +6,6 @@
     </pt-radio-group>
     <div class="divider"></div>
     <pt-button round small @click="handleClick" icon="icon-pinglun">提交</pt-button>
-
     <div class="divider"></div>
     <pt-checkbox v-model="status" checked-value="accepted" unchecked-value="not_accepted" label="是否接受协议"></pt-checkbox>
     <div class="divider"></div>
@@ -25,8 +24,18 @@
     <div class="divider"></div>
     <pt-button round @click="showMessage">显示消息</pt-button>
     <div class="divider"></div>
-
     <pt-select v-model="selectVal"></pt-select>
+    <div class="divider"></div>
+    <pt-date-picker v-model="dateVal"></pt-date-picker>
+    <div class="divider"></div>
+    <pt-tabs v-model="activeName" @tab-click="handleTabChange">
+      <pt-tab-pane label="离散数学" name="tab-one">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, minus similique! Iure tempore possimus iusto aliquid odit minima,
+        laudantium illum quasi facere quisquam sapiente sint consequatur, cupiditate numquam repellendus quidem!
+      </pt-tab-pane>
+      <pt-tab-pane label="数据结构" name="tab-two">222</pt-tab-pane>
+      <pt-tab-pane label="计算机组成" name="tab-three">333</pt-tab-pane>
+    </pt-tabs>
   </div>
 </template>
 
@@ -34,11 +43,7 @@
 export default {
   name: 'App',
   components: {},
-  watch: {
-    inputVal(newVal) {
-      // console.log(newVal)
-    }
-  },
+  watch: {},
   data() {
     return {
       gender: '1',
@@ -46,7 +51,10 @@ export default {
       switch1: 'not_accepted',
       inputVal: '请输入内容',
       visible: false,
-      selectVal: 10012
+      selectVal: 10012,
+      dateVal: '2020-08-08',
+      // testDate: '2020-08-15'
+      activeName: 'tab-one'
     }
   },
   methods: {
@@ -64,8 +72,10 @@ export default {
     },
     // 显示消息
     showMessage() {
-      this.$message({ content: '这是一条提示消息', type: 'info' })
-    }
+      const choice = ['info', 'warning', 'error', 'success']
+      this.$message({ content: '这是一条消息', type: choice[Math.floor(Math.random() * 4)] })
+    },
+    handleTabChange() {}
   },
   created() {}
 }

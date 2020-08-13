@@ -9,6 +9,9 @@ import PtInput from './components/input'
 import PtDialog from './components/dialog'
 import PtMessage from './components/message/index'
 import PtSelect from './components/select'
+import PtDatePicker from './components/datePicker'
+import PtTabPane from './components/pane'
+import PtTabs from './components/tabs'
 Vue.prototype.$message = PtMessage.install
 
 Vue.config.productionTip = false
@@ -21,6 +24,9 @@ Vue.component(PtSwitch.name, PtSwitch)
 Vue.component(PtInput.name, PtInput)
 Vue.component(PtDialog.name, PtDialog)
 Vue.component(PtSelect.name, PtSelect)
+Vue.component(PtDatePicker.name, PtDatePicker)
+Vue.component(PtTabPane.name, PtTabPane)
+Vue.component(PtTabs.name, PtTabs)
 
 new Vue({
   render: h => h(App)

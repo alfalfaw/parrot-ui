@@ -13,7 +13,7 @@
       />
       <span class="pt-select__suffix" v-if="showSuffix">
         <i v-show="this.value" class="iconfont icon-close" @click="$emit('input', '')"></i>
-        <i class="iconfont" @click="$emit('input', '')" :class="opened ? 'icon-upward' : 'icon-down'"></i>
+        <i class="iconfont" @click="opened = !opened" :class="opened ? 'icon-upward' : 'icon-down'"></i>
       </span>
     </div>
     <div class="pt-select__option" :class="{ opened: opened }">
