@@ -13,6 +13,9 @@ import PtDatePicker from './components/datePicker'
 import PtTabPane from './components/pane'
 import PtTabs from './components/tabs'
 import PtTag from './components/tag'
+import PtPagination from './components/pagination'
+import PtUpload from './components/upload'
+
 Vue.prototype.$message = PtMessage.install
 
 Vue.config.productionTip = false
@@ -29,6 +32,8 @@ Vue.component(PtDatePicker.name, PtDatePicker)
 Vue.component(PtTabPane.name, PtTabPane)
 Vue.component(PtTabs.name, PtTabs)
 Vue.component(PtTag.name, PtTag)
+Vue.component(PtPagination.name, PtPagination)
+Vue.component(PtUpload.name, PtUpload)
 
 new Vue({
   render: h => h(App)

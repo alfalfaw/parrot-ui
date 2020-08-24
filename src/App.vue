@@ -13,6 +13,8 @@
     <div class="divider"></div>
     <pt-input showPassword clearable v-model="inputVal" type="text"></pt-input>
     <div class="divider"></div>
+    <pt-input showPassword clearable v-model="inputVal" type="password"></pt-input>
+    <div class="divider"></div>
     <pt-button round @click="toggleDialog" icon="icon-pinglun">{{ visible ? '关闭Dialog' : '打开Dialog' }}</pt-button>
     <pt-dialog :visible.sync="visible" @opened="dialogOpened" @closed="dialogClosed">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, perspiciatis! Voluptas assumenda aut sequi id voluptatum autem
@@ -38,6 +40,10 @@
     </pt-tabs>
     <div class="divider"></div>
     <pt-tag :color="tagColor" @close="tagClose" closeable>新标签</pt-tag>
+    <div class="divider"></div>
+    <pt-pagination></pt-pagination>
+    <div class="divider"></div>
+    <pt-upload clearable placeholder="请选择文件"></pt-upload>
   </div>
 </template>
 

@@ -18,7 +18,14 @@
     </div>
     <div class="pt-select__option" :class="{ opened: opened }">
       <ul>
-        <li v-for="(option, index) in options" :key="index" @click="$emit('input', option.value)">{{ option.label }}</li>
+        <li
+          :class="{ selected: option.value === value }"
+          v-for="(option, index) in options"
+          :key="index"
+          @click="$emit('input', option.value)"
+        >
+          {{ option.label }}
+        </li>
       </ul>
     </div>
   </div>
@@ -151,8 +158,8 @@ export default {
     }
   }
   .pt-select__option {
-    border: 1px solid #ecf0f3;
     border-top: 0;
+    border-left: 1px solid #ecf0f3;
     max-height: 0;
     overflow: hidden;
     transition: 0.4s;
@@ -168,6 +175,9 @@ export default {
         padding: 8px 5px;
         transition: 0.65s;
         font-size: 14px;
+        &.selected {
+          background: #ecf0f3;
+        }
         &:hover {
           background: #ecf0f3;
         }
