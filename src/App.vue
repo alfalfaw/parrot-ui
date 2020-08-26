@@ -11,9 +11,9 @@
     <div class="divider"></div>
     <pt-switch v-model="switch1" checked-value="accepted" unchecked-value="not_accepted"></pt-switch>
     <div class="divider"></div>
-    <pt-input showPassword clearable v-model="inputVal" type="text"></pt-input>
+    <pt-input clearable v-model="inputVal" type="text"></pt-input>
     <div class="divider"></div>
-    <pt-input showPassword clearable v-model="inputVal" type="password"></pt-input>
+    <pt-input showPassword clearable v-model="password" type="password"></pt-input>
     <div class="divider"></div>
     <pt-button round @click="toggleDialog" icon="icon-pinglun">{{ visible ? '关闭Dialog' : '打开Dialog' }}</pt-button>
     <pt-dialog :visible.sync="visible" @opened="dialogOpened" @closed="dialogClosed">
@@ -43,7 +43,11 @@
     <div class="divider"></div>
     <pt-pagination></pt-pagination>
     <div class="divider"></div>
-    <pt-upload clearable placeholder="请选择文件"></pt-upload>
+    <pt-upload clearable placeholder="请选择文件" @on-success="uploadSuccess" @on-error="uploadError" :action="uploadUrl">
+      <template>
+        <img ref="image" :src="imageUrl" alt="" />
+      </template>
+    </pt-upload>
   </div>
 </template>
 
@@ -58,13 +62,17 @@ export default {
       status: 'accepted',
       switch1: 'not_accepted',
       inputVal: '请输入内容',
+      password: '',
       visible: false,
       selectVal: 10012,
       dateVal: '2020-08-08',
       // testDate: '2020-08-15'
       activeName: 'tab-one',
       // 标签颜色
-      tagColor: '#95afc0'
+      tagColor: '#95afc0',
+      imageUrl: '',
+      // https://s1.ax1x.com/2020/07/18/U20LIs.png
+      uploadUrl: 'http://localhost:5000/upload'
     }
   },
   methods: {
@@ -88,6 +96,14 @@ export default {
     handleTabChange() {},
     tagClose() {
       // alert('tag close')
+    },
+    uploadSuccess(data) {
+      console.log('上传成功')
+      console.log(data)
+    },
+    uploadError(error) {
+      console.log('上传失败')
+      console.log(error)
     }
   },
   created() {}

@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-upload">
+  <div class="pt-upload" :class="{ 'is-value': model, 'is-avater': $slots.default }">
     <div class="pt-upload__input">
       <input
         class="pt-upload__inner"
@@ -11,10 +11,15 @@
         :disabled="disabled"
       />
       <input class="pt-upload__original" type="file" @change="fileUpload" ref="fileInput" />
+      <slot></slot>
     </div>
     <span class="pt-upload__suffix" v-if="showSuffix">
-      <i v-if="model && clearable" class="iconfont icon-close" @click="clear"></i>
-      <i v-else class="iconfont icon-03" @click="chooseFile"></i>
+      <i v-if="model && clearable && !$slots.default" class="iconfont icon-close" @click="clear"></i>
+      <i v-else-if="$slots.default && !model" class="iconfont icon-Plus" @click="chooseFile"></i>
+      <i v-else-if="!$slots.default" class="iconfont icon-03" @click="chooseFile"></i>
+      <span class="mask" v-else>
+        <i class="iconfont icon-delete" @click="clear"></i>
+      </span>
     </span>
   </div>
 </template>
@@ -29,9 +34,8 @@ export default {
     },
     action: {
       type: String,
-      default: 'http://localhost:5000/upload'
+      required: true
     },
-
     clearable: {
       type: Boolean,
       default: false
@@ -43,6 +47,12 @@ export default {
     placeholder: {
       type: String,
       default: ''
+    },
+    headers: {
+      type: Object,
+      default() {
+        return {}
+      }
     }
   },
   data() {
@@ -54,28 +64,54 @@ export default {
     fileUpload(e) {
       const formData = new FormData()
       formData.append('file', e.target.files[0])
+
+      if (this.$slots.default) {
+        // 验证图片类型和大小
+        // if (!['image/jpeg', 'image/gif', 'image/png', 'image/svg+xml'].includes(file.type)) {
+        //   console.log('Only images are allowed.')
+        //   return
+        // }
+
+        // // check file size (< 2MB)
+        // if (file.size > 2 * 1024 * 1024) {
+        //   console.log('File must be less than 2MB.')
+        //   return
+        // }
+
+        // 上传图片
+        const imageUrl = URL.createObjectURL(e.target.files[0])
+        // console.log('打印插槽中的img')
+        this.$slots.default[0].elm.src = imageUrl
+      }
+
       fetch(this.action, {
         method: 'POST',
-        body: formData
+        body: formData,
+        headers: this.headers
       })
-        .then(response => response.json)
+        .then(response => response.json())
         .then(result => {
-          // console.log(e.target.files[0])
           this.model = e.target.files[0].name
-          console.log('Success', result)
+          this.$emit('on-success', result)
         })
         .catch(error => {
-          console.error('Error:', error)
+          this.$emit('on-error', error)
+          // console.error('Error:', error)
         })
     },
+
     clear() {
       this.$refs.fileInput.value = null
       this.model = ''
+      if (this.$slots.default) {
+        this.$slots.default[0].elm.src = null
+      }
     },
     chooseFile() {
       this.$refs.fileInput.dispatchEvent(new MouseEvent('click'))
     }
-  }
+  },
+  mounted() {}
 }
 </script>
 
@@ -100,7 +136,6 @@ export default {
   }
   .pt-upload__input {
     position: relative;
-
     .pt-upload__original {
       opacity: 0;
       position: absolute;
@@ -155,6 +190,79 @@ export default {
       transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
       &:hover {
         color: #95afc0;
+      }
+    }
+  }
+  // 上传头像
+  &.is-avater {
+    height: 180px;
+    border: 1px dashed #ecf0f3;
+    &.is-value {
+      border: 1px dashed #95afc0;
+    }
+    &:hover {
+      border: 1px dashed #95afc0;
+    }
+
+    .pt-upload__input {
+      height: 100%;
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+      .pt-upload__inner {
+        display: none;
+      }
+    }
+    .pt-upload__suffix {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .icon-Plus {
+        font-size: 22px;
+      }
+      .mask {
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .icon-delete {
+          font-size: 22px;
+          color: transparent;
+          position: relative;
+          z-index: 2;
+        }
+        &::after {
+          position: absolute;
+          content: '';
+          height: 100%;
+          width: 100%;
+          background: transparent;
+          transition: 0.65s;
+        }
+        &:hover::after {
+          background: rgba(0, 0, 0, 0.3);
+        }
+        &:hover .icon-delete {
+          color: rgba(255, 255, 255, 0.8);
+          &:hover {
+            color: #ecf0f3;
+          }
+        }
       }
     }
   }
