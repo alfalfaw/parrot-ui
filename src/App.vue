@@ -48,8 +48,8 @@
       </template>
     </pt-upload>
 
-    <!-- <div class="divider"></div>
-    <pt-pagination :total="total"></pt-pagination> -->
+    <div class="divider"></div>
+    <pt-pagination :total="total"></pt-pagination>
 
     <div class="divider"></div>
     <pt-card>
@@ -96,7 +96,7 @@ export default {
       imageUrl: '',
       // https://s1.ax1x.com/2020/07/18/U20LIs.png
       uploadUrl: 'http://localhost:5000/upload',
-      total: 112,
+      total: 100,
       currentDate: '2020-08-28',
       rangeVal: '10',
       avaterUrl: 'https://s1.ax1x.com/2020/07/18/U20LIs.png'
