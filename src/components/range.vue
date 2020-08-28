@@ -10,6 +10,7 @@
       datalist="tickmarks"
       :value="value"
       @change="$emit('input', $event.target.value)"
+      @input="handleInput"
     />
     <datalist v-if="datalist" id="tickmarks">
       <option :value="option.value" v-for="(option, index) of datalist" :key="index" :label="option.label"></option>
@@ -45,20 +46,31 @@ export default {
   data() {
     return {}
   },
-  watch: {
-    value: {
-      handler: function(newVal) {
-        this.$nextTick(() => {
-          // console.log('打印this')
-          // console.log(this)
-          const width = (newVal / this.max) * 100 + '%'
-          this.$refs.mask.style.width = width
-        })
-      },
-      immediate: true // 第一次刷新页面时就会执行
+  // watch: {
+  //   value: {
+  //     handler: function(newVal) {
+  //       this.$nextTick(() => {
+  //         // console.log('打印this')
+  //         // console.log(this)
+  //         const width = (newVal / this.max) * 100 + '%'
+  //         this.$refs.mask.style.width = width
+  //       })
+  //     },
+  //     immediate: true // 第一次刷新页面时就会执行
+  //   }
+  // },
+  methods: {
+    updateUI(value) {
+      const width = (value / this.max) * 100 + '%'
+      this.$refs.mask.style.width = width
+    },
+    handleInput(e) {
+      this.updateUI(e.target.value)
     }
   },
-  methods: {}
+  mounted() {
+    this.updateUI(this.value)
+  }
 }
 </script>
 
