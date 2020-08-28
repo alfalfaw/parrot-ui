@@ -1,6 +1,6 @@
 <template>
   <div class="pt-range">
-    <div class="mask" ref="mask"></div>
+    <div class="mask" :style="{ width }"></div>
     <input
       class="pt-range__inner"
       type="range"
@@ -9,8 +9,7 @@
       :step="step"
       datalist="tickmarks"
       :value="value"
-      @change="$emit('input', $event.target.value)"
-      @input="handleInput"
+      @input="$emit('input', $event.target.value)"
     />
     <datalist v-if="datalist" id="tickmarks">
       <option :value="option.value" v-for="(option, index) of datalist" :key="index" :label="option.label"></option>
@@ -43,34 +42,18 @@ export default {
       default: 1
     }
   },
+
   data() {
     return {}
   },
-  // watch: {
-  //   value: {
-  //     handler: function(newVal) {
-  //       this.$nextTick(() => {
-  //         // console.log('打印this')
-  //         // console.log(this)
-  //         const width = (newVal / this.max) * 100 + '%'
-  //         this.$refs.mask.style.width = width
-  //       })
-  //     },
-  //     immediate: true // 第一次刷新页面时就会执行
-  //   }
-  // },
-  methods: {
-    updateUI(value) {
-      const width = (value / this.max) * 100 + '%'
-      this.$refs.mask.style.width = width
-    },
-    handleInput(e) {
-      this.updateUI(e.target.value)
+
+  computed: {
+    width() {
+      return (this.value / this.max) * 100 + '%'
     }
   },
-  mounted() {
-    this.updateUI(this.value)
-  }
+
+  mounted() {}
 }
 </script>
 

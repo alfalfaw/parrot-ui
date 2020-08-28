@@ -66,6 +66,8 @@
     </pt-card>
     <div class="divider"></div>
     <pt-range v-model="rangeVal"></pt-range>
+    <div class="divider"></div>
+    <pt-avater></pt-avater>
   </div>
 </template>
 

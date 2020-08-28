@@ -18,6 +18,8 @@ import PtUpload from './components/upload'
 
 import PtCard from './components/card'
 import PtRange from './components/range'
+import PtAvater from './components/avater'
+
 Vue.prototype.$message = PtMessage.install
 
 Vue.config.productionTip = false
@@ -38,6 +40,9 @@ Vue.component(PtPagination.name, PtPagination)
 Vue.component(PtUpload.name, PtUpload)
 Vue.component(PtCard.name, PtCard)
 Vue.component(PtRange.name, PtRange)
+
+Vue.component(PtAvater.name, PtAvater)
+
 new Vue({
   render: h => h(App)
 }).$mount('#app')
