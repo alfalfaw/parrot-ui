@@ -40,14 +40,30 @@
     </pt-tabs>
     <div class="divider"></div>
     <pt-tag :color="tagColor" @close="tagClose" closeable>新标签</pt-tag>
-    <div class="divider"></div>
-    <pt-pagination></pt-pagination>
+
     <div class="divider"></div>
     <pt-upload clearable placeholder="请选择文件" @on-success="uploadSuccess" @on-error="uploadError" :action="uploadUrl">
       <template>
         <img ref="image" :src="imageUrl" alt="" />
       </template>
     </pt-upload>
+
+    <div class="divider"></div>
+    <pt-pagination :total="total"></pt-pagination>
+
+    <div class="divider"></div>
+    <pt-card>
+      <template>
+        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image" />
+        <div style="padding: 14px;">
+          <span>好吃的汉堡</span>
+          <div class="bottom clearfix">
+            <time class="time">{{ currentDate }}</time>
+            <el-button type="text" class="button">操作按钮</el-button>
+          </div>
+        </div>
+      </template>
+    </pt-card>
   </div>
 </template>
 
@@ -72,7 +88,9 @@ export default {
       tagColor: '#95afc0',
       imageUrl: '',
       // https://s1.ax1x.com/2020/07/18/U20LIs.png
-      uploadUrl: 'http://localhost:5000/upload'
+      uploadUrl: 'http://localhost:5000/upload',
+      total: 112,
+      currentDate: new Date()
     }
   },
   methods: {
