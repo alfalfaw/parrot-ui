@@ -102,8 +102,8 @@ export default {
       -webkit-appearance: none;
       appearance: none;
       cursor: pointer;
-      width: 5px;
-      height: 5px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background-color: #95afc0;
     }

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <pt-radio-group v-model="gender">
-      <pt-radio label="1">男</pt-radio>
-      <pt-radio label="0">女</pt-radio>
+      <pt-radio label="1">Cat</pt-radio>
+      <pt-radio label="0">Dog</pt-radio>
     </pt-radio-group>
     <div class="divider"></div>
     <pt-button round small @click="handleClick" icon="icon-pinglun">提交</pt-button>
@@ -56,10 +56,13 @@
       <template>
         <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image" />
         <div style="padding: 14px;">
-          <span>好吃的汉堡</span>
+          <span>汉堡</span>
           <div class="bottom clearfix">
             <time class="time">{{ currentDate }}</time>
-            <button type="text" class="button">操作按钮</button>
+            <br />
+            <div style="text-align:right;">
+              <pt-button small style="margin-top:10px;">查看更多</pt-button>
+            </div>
           </div>
         </div>
       </template>
@@ -67,7 +70,7 @@
     <div class="divider"></div>
     <pt-range v-model="rangeVal"></pt-range>
     <div class="divider"></div>
-    <pt-avater></pt-avater>
+    <pt-avater :src="avaterUrl"></pt-avater>
   </div>
 </template>
 
@@ -94,8 +97,9 @@ export default {
       // https://s1.ax1x.com/2020/07/18/U20LIs.png
       uploadUrl: 'http://localhost:5000/upload',
       total: 112,
-      currentDate: new Date(),
-      rangeVal: '10'
+      currentDate: '2020-08-28',
+      rangeVal: '10',
+      avaterUrl: 'https://s1.ax1x.com/2020/07/18/U20LIs.png'
     }
   },
   methods: {
@@ -136,11 +140,5 @@ export default {
 <style lang="scss">
 .divider {
   margin-bottom: 20px;
-}
-#message {
-  // position: fixed;
-  // left: 50%;
-  // transform: translateX(-50%);
-  // top: 20px;
 }
 </style>
