@@ -17,7 +17,7 @@ import PtPagination from './components/pagination'
 import PtUpload from './components/upload'
 
 import PtCard from './components/card'
-
+import PtRange from './components/range'
 Vue.prototype.$message = PtMessage.install
 
 Vue.config.productionTip = false
@@ -37,7 +37,7 @@ Vue.component(PtTag.name, PtTag)
 Vue.component(PtPagination.name, PtPagination)
 Vue.component(PtUpload.name, PtUpload)
 Vue.component(PtCard.name, PtCard)
-
+Vue.component(PtRange.name, PtRange)
 new Vue({
   render: h => h(App)
 }).$mount('#app')

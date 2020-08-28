@@ -48,8 +48,8 @@
       </template>
     </pt-upload>
 
-    <div class="divider"></div>
-    <pt-pagination :total="total"></pt-pagination>
+    <!-- <div class="divider"></div>
+    <pt-pagination :total="total"></pt-pagination> -->
 
     <div class="divider"></div>
     <pt-card>
@@ -59,11 +59,13 @@
           <span>好吃的汉堡</span>
           <div class="bottom clearfix">
             <time class="time">{{ currentDate }}</time>
-            <el-button type="text" class="button">操作按钮</el-button>
+            <button type="text" class="button">操作按钮</button>
           </div>
         </div>
       </template>
     </pt-card>
+    <div class="divider"></div>
+    <pt-range v-model="rangeVal"></pt-range>
   </div>
 </template>
 
@@ -90,7 +92,8 @@ export default {
       // https://s1.ax1x.com/2020/07/18/U20LIs.png
       uploadUrl: 'http://localhost:5000/upload',
       total: 112,
-      currentDate: new Date()
+      currentDate: new Date(),
+      rangeVal: '10'
     }
   },
   methods: {
