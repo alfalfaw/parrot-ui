@@ -19,7 +19,7 @@ import PtUpload from './components/upload'
 import PtCard from './components/card'
 import PtRange from './components/range'
 import PtAvater from './components/avater'
-
+import PtTooltip from './components/tooltip'
 Vue.prototype.$message = PtMessage.install
 
 Vue.config.productionTip = false
@@ -40,8 +40,8 @@ Vue.component(PtPagination.name, PtPagination)
 Vue.component(PtUpload.name, PtUpload)
 Vue.component(PtCard.name, PtCard)
 Vue.component(PtRange.name, PtRange)
-
 Vue.component(PtAvater.name, PtAvater)
+Vue.component(PtTooltip.name, PtTooltip)
 
 new Vue({
   render: h => h(App)

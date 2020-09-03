@@ -60,9 +60,6 @@
           <div class="bottom clearfix">
             <time class="time">{{ currentDate }}</time>
             <br />
-            <div style="text-align:right;">
-              <pt-button small style="margin-top:10px;">查看更多</pt-button>
-            </div>
           </div>
         </div>
       </template>
@@ -71,6 +68,13 @@
     <pt-range v-model="rangeVal"></pt-range>
     <div class="divider"></div>
     <pt-avater :src="avaterUrl"></pt-avater>
+
+    <div class="divider"></div>
+    <div style="margin-left:100px;">
+      <pt-tooltip>
+        <pt-button icon="icon-pinglun" small></pt-button>
+      </pt-tooltip>
+    </div>
   </div>
 </template>
 
