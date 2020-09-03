@@ -3,7 +3,10 @@
     class="pt-button"
     @click="handleClick"
     :disabled="disabled"
-    :class="[`pt-button--${type}`, { 'is-round': round, 'is-circle': circle, 'is-disabled': disabled, 'is-small': small }]"
+    :class="[
+      `pt-button--${type}`,
+      { 'is-round': round, 'is-circle': circle, 'is-disabled': disabled, 'is-small': small, 'is-medium': medium }
+    ]"
   >
     <i :class="['iconfont', icon]" v-if="icon"></i>
     <span>
@@ -42,6 +45,10 @@ export default {
       default: ''
     },
     small: {
+      type: Boolean,
+      default: false
+    },
+    medium: {
       type: Boolean,
       default: false
     }
@@ -101,6 +108,13 @@ export default {
       border-radius: 12px;
     }
   }
+  &.is-medium {
+    padding: 9px 14px;
+    &.is-round {
+      border-radius: 14px;
+    }
+  }
+
   &.is-round {
     border-radius: 16px;
   }

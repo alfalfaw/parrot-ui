@@ -20,6 +20,7 @@ import PtCard from './components/card'
 import PtRange from './components/range'
 import PtAvater from './components/avater'
 import PtTooltip from './components/tooltip'
+import PtBadge from './components/badge'
 Vue.prototype.$message = PtMessage.install
 
 Vue.config.productionTip = false
@@ -42,6 +43,7 @@ Vue.component(PtCard.name, PtCard)
 Vue.component(PtRange.name, PtRange)
 Vue.component(PtAvater.name, PtAvater)
 Vue.component(PtTooltip.name, PtTooltip)
+Vue.component(PtBadge.name, PtBadge)
 
 new Vue({
   render: h => h(App)

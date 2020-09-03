@@ -75,6 +75,11 @@
         <pt-button icon="icon-pinglun" small></pt-button>
       </pt-tooltip>
     </div>
+
+    <div class="divider"></div>
+    <pt-badge :value="100" :max="99" is-dot>
+      <pt-button medium>按钮</pt-button>
+    </pt-badge>
   </div>
 </template>
 
