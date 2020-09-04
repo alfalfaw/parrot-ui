@@ -80,6 +80,9 @@
     <pt-badge :value="100" :max="99" is-dot>
       <pt-button medium>按钮</pt-button>
     </pt-badge>
+
+    <div class="divider"></div>
+    <pt-alert type="info" title="错误提示的文案"></pt-alert>
   </div>
 </template>
 
