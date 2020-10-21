@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <pt-radio-group v-model="gender">
+    <pt-radio-group v-model="pet">
       <pt-radio label="1">Cat</pt-radio>
       <pt-radio label="0">Dog</pt-radio>
     </pt-radio-group>
@@ -44,7 +44,7 @@
     <div class="divider"></div>
     <pt-upload clearable placeholder="请选择文件" @on-success="uploadSuccess" @on-error="uploadError" :action="uploadUrl">
       <template>
-        <img ref="image" :src="imageUrl" alt="" />
+        <img v-show="imageUrl" ref="image" :src="imageUrl" alt="" />
       </template>
     </pt-upload>
 
@@ -54,11 +54,11 @@
     <div class="divider"></div>
     <pt-card>
       <template>
-        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image" />
-        <div style="padding: 14px;">
-          <span>汉堡</span>
+        <img src="https://s1.ax1x.com/2020/07/18/U206qe.md.png" class="image" />
+        <div style="padding: 12px;">
+          <span>title1</span>
           <div class="bottom clearfix">
-            <time class="time">{{ currentDate }}</time>
+            <time class="time" style="font-size:12px">{{ currentDate }}</time>
             <br />
           </div>
         </div>
@@ -93,7 +93,7 @@ export default {
   watch: {},
   data() {
     return {
-      gender: '1',
+      pet: '1',
       status: 'accepted',
       switch1: 'not_accepted',
       inputVal: '请输入内容',
@@ -106,12 +106,11 @@ export default {
       // 标签颜色
       tagColor: '#95afc0',
       imageUrl: '',
-      // https://s1.ax1x.com/2020/07/18/U20LIs.png
       uploadUrl: 'http://localhost:5000/upload',
       total: 1000,
       currentDate: '2020-08-28',
       rangeVal: '10',
-      avaterUrl: 'https://s1.ax1x.com/2020/07/18/U20LIs.png'
+      avaterUrl: 'https://s1.ax1x.com/2020/07/18/U206qe.md.png'
     }
   },
   methods: {
@@ -127,10 +126,11 @@ export default {
     dialogClosed() {
       // console.log('dialog closed')
     },
+
     // 显示消息
     showMessage() {
       const choice = ['info', 'warning', 'error', 'success']
-      this.$message({ content: '这是一条消息', type: choice[Math.floor(Math.random() * 4)] })
+      this.$message({ content: 'This is a custom message', type: choice[Math.floor(Math.random() * 4)] })
     },
     handleTabChange() {},
     tagClose() {
